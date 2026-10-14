@@ -4,7 +4,8 @@
  * Run it, record both times, and explain the difference in one sentence.
  */
 public class StringSpeed {
-
+    
+ 
     public static void main(String[] args) {
         int n = 20000;
 
