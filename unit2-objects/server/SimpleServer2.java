@@ -1,23 +1,24 @@
+
+
 import java.io.*;
 import java.net.*;
 import java.util.*;
-public class SimpleServer {
+
+public class SimpleServer2 {
     private ServerSocket serverSocket;
     private Socket socket;
-    private PrintWriter out;
     private Scanner in;
-    public SimpleServer(int port) throws Exception{
-        serverSocket=new ServerSocket(port);
-        
+    private PrintWriter out;
 
+    public SimpleServer2(int port) throws Exception{
+        serverSocket=new ServerSocket(port);
     }
     public void acceptClient() throws Exception{
         socket=serverSocket.accept();
-        in=new Scanner(socket.getInputStream());
+        in= new Scanner(socket.getInputStream());
         out = new PrintWriter(socket.getOutputStream(), true);
     }
     public String receiveMessage(){
-
         return in.nextLine();
     }
     public void sendMessage(String msg){
@@ -32,25 +33,21 @@ public class SimpleServer {
     }
     public static void main(String[] args){
         Scanner input=new Scanner(System.in);
-        try{
-
-            SimpleServer server=new SimpleServer(99);
-            server.acceptClient();
-            while(true){
-                String message=input.nextLine();
-                server.sendMessage(message);
-                String response=server.receiveMessage();
-                System.out.println("ClientL "+response);
-                if(response.equals("stop")){
-                    break;
-                }
-                
-
-
-            }
+        try { 
+        SimpleServer2 server=new SimpleServer2(9090);
+        server.acceptClient();
+        while(true){
+           String message=input.nextLine();
+           server.sendMessage(message);
+           String response=server.receiveMessage();
+           System.out.println("Client:  "+response);
+           if(response.equals("stop")){
+            break;
+           }
+        } //try ends
+        server.close();
         }catch(Exception e){
-            
-        }
-    }
-
+        }//catch ends
+    } //main ends
+    
 }
